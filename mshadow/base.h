@@ -534,6 +534,42 @@ struct identity{
     return a;
   }
 };
+
+struct gt {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType a, DType b) {
+    return a > b ? DType(1) : DType(0);
+  }
+};
+
+struct ge {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType a, DType b) {
+    return a >= b ? DType(1) : DType(0);
+  }
+};
+
+struct lt {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType a, DType b) {
+    return a < b ? DType(1) : DType(0);
+  }
+};
+
+struct le {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType a, DType b) {
+    return a <= b ? DType(1) : DType(0);
+  }
+};
+
+struct eq {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType a, DType b) {
+    return a == b ? DType(1) : DType(0);
+  }
+};
+
 }  // namespace op
 /*! \brief namespace for savers */
 namespace sv {
