@@ -12,6 +12,8 @@
 #  Add MSHADOW_NVCCFLAGS to the nvcc compile flags
 #----------------------------------------------------------------------------------------
 
+ADD_MSHADOW_CFLAGS = -I/usr/include/openblas
+
 # whether use CUDA during compile
 USE_CUDA = 0
 
@@ -22,7 +24,7 @@ USE_CUDA_PATH = NONE
 #
 # choose the version of blas you want to use
 # can be: mkl, blas, atlas, openblas, apple
-USE_BLAS = blas
+USE_BLAS = openblas
 #
 # add path to intel library, you may need it
 # for MKL, if you did not add the path to enviroment variable
