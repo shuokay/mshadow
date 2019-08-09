@@ -5,6 +5,7 @@
 #include <thrust/device_ptr.h>
 #include <thrust/sort.h>
 #endif
+namespace mshadow {
 namespace plugin {
 #ifdef __CUDACC__
 namespace cuda {
@@ -60,7 +61,7 @@ template <typename OP>
 struct Kernel<OP, mshadow::cpu> {
   template <typename... Args>
   inline static bool Launch(mshadow::Stream<mshadow::cpu>*, const size_t N, Args... args) {
-// #pragma omp parallel for num_threads(8)
+    // #pragma omp parallel for num_threads(8)
     for (size_t i = 0; i < static_cast<size_t>(N); ++i) {
       OP::Map(i, args...);
     }
@@ -92,5 +93,6 @@ MSHADOW_XINLINE mshadow::Shape<ndim> unravel(const size_t idx, const mshadow::Sh
   return ret;
 }
 }  // namespace plugin
+}  // namespace mshadow
 
 #endif
