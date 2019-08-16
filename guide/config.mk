@@ -12,7 +12,7 @@
 #  Add MSHADOW_NVCCFLAGS to the nvcc compile flags
 #----------------------------------------------------------------------------------------
 
-ADD_MSHADOW_CFLAGS = -I/usr/include/openblas
+ADD_MSHADOW_CFLAGS = -I/usr/include/openblas -fopenmp
 
 # whether use CUDA during compile
 USE_CUDA = 0
