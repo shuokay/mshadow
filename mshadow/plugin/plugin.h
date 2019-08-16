@@ -1,6 +1,7 @@
 #ifndef MSHADOW_PLUGIN_H_
 #define MSHADOW_PLUGIN_H_
 #include <omp.h>
+#include "../base.h"
 #include "../tensor.h"
 #ifdef __CUDACC__
 #include <thrust/device_ptr.h>
@@ -50,12 +51,6 @@ struct Kernel<OP, mshadow::gpu> {
 };
 #endif
 
-#define MSHADOW_FORCE_INLINE inline __attribute__((always_inline))
-#ifdef __CUDACC__
-#define MSHADOW_XINLINE MSHADOW_FORCE_INLINE __device__ __host__
-#else
-#define MSHADOW_XINLINE MSHADOW_FORCE_INLINE
-#endif
 template <typename OP, typename xpu>
 struct Kernel;
 template <typename OP>
