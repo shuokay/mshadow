@@ -570,6 +570,19 @@ struct eq {
   }
 };
 
+struct clip {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType x, DType min, DType max) {
+    if (x < min) {
+      return min;
+    } else if (x > max) {
+      return max;
+    } else {
+      return x;
+    }
+  }
+};
+
 }  // namespace op
 /*! \brief namespace for savers */
 namespace sv {
