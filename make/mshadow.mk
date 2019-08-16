@@ -21,6 +21,11 @@ else
   ATLAS_LDFLAGS := -lcblas
 endif
 
+ifeq ($(USE_GLOG), 1)
+	MSHADOW_CFLAGS += -DDMLC_USE_GLOG=1
+	MSHADOW_LDFLAGS += -lglog
+endif
+
 ifndef USE_SSE
 	USE_SSE=1
 endif

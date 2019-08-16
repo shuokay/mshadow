@@ -14,6 +14,8 @@
 
 ADD_MSHADOW_CFLAGS = -I/usr/include/openblas -fopenmp
 
+USE_GLOG = 1
+
 # whether use CUDA during compile
 USE_CUDA = 0
 
