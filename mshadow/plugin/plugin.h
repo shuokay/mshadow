@@ -1,5 +1,6 @@
 #ifndef MSHADOW_PLUGIN_H_
 #define MSHADOW_PLUGIN_H_
+#include <omp.h>
 #include "../tensor.h"
 #ifdef __CUDACC__
 #include <thrust/device_ptr.h>
@@ -61,7 +62,7 @@ template <typename OP>
 struct Kernel<OP, mshadow::cpu> {
   template <typename... Args>
   inline static bool Launch(mshadow::Stream<mshadow::cpu>*, const size_t N, Args... args) {
-    // #pragma omp parallel for num_threads(8)
+#pragma omp parallel for num_threads(omp_get_thread_num())
     for (size_t i = 0; i < static_cast<size_t>(N); ++i) {
       OP::Map(i, args...);
     }
