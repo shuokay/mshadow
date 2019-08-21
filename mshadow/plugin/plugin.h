@@ -1,3 +1,11 @@
+/**
+ * @file plugin.h
+ * @author Yushu Gao
+ * @brief plugin from mxnet
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #ifndef MSHADOW_PLUGIN_H_
 #define MSHADOW_PLUGIN_H_
 #include <omp.h>
