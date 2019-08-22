@@ -64,9 +64,9 @@ struct Kernel;
 template <typename OP>
 struct Kernel<OP, mshadow::cpu> {
   template <typename... Args>
-  inline static bool Launch(mshadow::Stream<mshadow::cpu>*, const size_t N, Args... args) {
+  inline static bool Launch(mshadow::Stream<mshadow::cpu>*, const int N, Args... args) {
 #pragma omp parallel for num_threads(omp_get_thread_num())
-    for (size_t i = 0; i < static_cast<size_t>(N); ++i) {
+    for (int i = 0; i < N; ++i) {
       OP::Map(i, args...);
     }
     return true;
@@ -86,7 +86,7 @@ MSHADOW_XINLINE size_t ravel(const mshadow::Shape<ndim>& coord, const mshadow::S
 
 /* Compute coordinates from flattened index given shape */
 template <int ndim>
-MSHADOW_XINLINE mshadow::Shape<ndim> unravel(const size_t idx, const mshadow::Shape<ndim>& shape) {
+MSHADOW_XINLINE mshadow::Shape<ndim> unravel(const int idx, const mshadow::Shape<ndim>& shape) {
   mshadow::Shape<ndim> ret;
 #pragma unroll
   for (int i = ndim - 1, j = idx; i >= 0; --i) {
