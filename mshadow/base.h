@@ -527,62 +527,13 @@ struct right {
 // in the same style as binary and unary operator
 // to use, simply write F<op::identity>( src )
 /*! \brief identity function that maps a real number to it self */
-struct identity{
+struct identity {
   /*! \brief map a to result using defined operation */
-  template<typename DType>
+  template <typename DType>
   MSHADOW_XINLINE static DType Map(DType a) {
     return a;
   }
 };
-
-struct gt {
-  template <typename DType>
-  MSHADOW_XINLINE static DType Map(DType a, DType b) {
-    return a > b ? DType(1) : DType(0);
-  }
-};
-
-struct ge {
-  template <typename DType>
-  MSHADOW_XINLINE static DType Map(DType a, DType b) {
-    return a >= b ? DType(1) : DType(0);
-  }
-};
-
-struct lt {
-  template <typename DType>
-  MSHADOW_XINLINE static DType Map(DType a, DType b) {
-    return a < b ? DType(1) : DType(0);
-  }
-};
-
-struct le {
-  template <typename DType>
-  MSHADOW_XINLINE static DType Map(DType a, DType b) {
-    return a <= b ? DType(1) : DType(0);
-  }
-};
-
-struct eq {
-  template <typename DType>
-  MSHADOW_XINLINE static DType Map(DType a, DType b) {
-    return a == b ? DType(1) : DType(0);
-  }
-};
-
-struct clip {
-  template <typename DType>
-  MSHADOW_XINLINE static DType Map(DType x, DType min, DType max) {
-    if (x < min) {
-      return min;
-    } else if (x > max) {
-      return max;
-    } else {
-      return x;
-    }
-  }
-};
-
 }  // namespace op
 /*! \brief namespace for savers */
 namespace sv {
