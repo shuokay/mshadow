@@ -1,6 +1,6 @@
 /**
  * @file clip.h
- * @author Yushu Gao (yushu.gao@horizon.ai)
+ * @author Yushu Gao
  * @brief clip the tensor to a certain range
  *
  * @copyright Copyright (c) 2019
