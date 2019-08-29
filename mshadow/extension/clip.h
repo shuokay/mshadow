@@ -34,7 +34,7 @@ struct ClipExp
   }
 
   explicit ClipExp(const SrcExp& src, const DType min, const DType max)
-      : src_(src), min_(scalar(min)), max_(scalar(max)) {
+      : src_(src), min_(ScalarExp<DType>(min)), max_(ScalarExp<DType>(max)) {
     this->shape_ = ShapeCheck<srcdim, SrcExp>::Check(src_);
   }
 };
