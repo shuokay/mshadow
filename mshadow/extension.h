@@ -29,6 +29,7 @@
 #include "./extension/reduce_with_axis.h"
 #include "./extension/reduceto1d.h"
 #include "./extension/reshape.h"
+#include "./extension/shift.h"
 #include "./extension/slice.h"
 #include "./extension/slice_ex.h"
 #include "./extension/spatial_pool.h"

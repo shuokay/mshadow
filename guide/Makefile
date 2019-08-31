@@ -9,7 +9,7 @@ export LDFLAGS= -lm $(MSHADOW_LDFLAGS)
 export NVCCFLAGS = -O3 --use_fast_math -ccbin $(CXX) $(MSHADOW_NVCCFLAGS)
 
 # specify tensor path
-BIN = basic defop
+BIN = basic defop test
 OBJ =
 CUOBJ =
 CUBIN =
@@ -20,7 +20,7 @@ all: $(BIN) $(OBJ) $(CUBIN) $(CUOBJ)
 basic: basic.cpp
 defop: defop.cpp
 basic_stream: basic_stream.cu
-
+test: test.cpp
 $(BIN) :
 	$(CXX) $(CFLAGS) -o $@ $(filter %.cpp %.o %.c, $^)  $(LDFLAGS)
 
