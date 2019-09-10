@@ -20,6 +20,7 @@
 #include "./extension/fill.h"
 #include "./extension/flip.h"
 #include "./extension/implicit_gemm.h"
+#include "./extension/map_if.h"
 #include "./extension/mask.h"
 #include "./extension/mirror.h"
 #include "./extension/one_hot.h"
@@ -40,4 +41,10 @@
 #include "./extension/take_grad.h"
 #include "./extension/transpose.h"
 #include "./extension/unpack_patch2col.h"
+#include "op.h"
+namespace mshadow {
+namespace expr_ex {
+#define clip(src, min, max) map_if(map_if(src, F<op::gt>(src, min), min), F<op::lt>(src, max), max)
+}  // namespace expr
+}  // namespace mshadow
 #endif  // MSHADOW_EXTENSION_H_
