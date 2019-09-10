@@ -60,6 +60,29 @@ struct abs {
     return x < 0 ? -x : x;
   }
 };
+
+struct right_shift {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType value, DType shift) {
+    return value >> shift;
+  }
+};
+
+struct round_shift {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType value, DType shift) {
+    DType half = DType(1) << (shift - 1);
+    return (value + half) >> shift;
+  }
+};
+
+struct left_shift {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType value, DType shift) {
+    return value << shift;
+  }
+};
+
 }  // namespace op
 }  // namespace mshadow
 #endif
