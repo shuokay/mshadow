@@ -30,6 +30,7 @@
 #include "./extension/reduce_with_axis.h"
 #include "./extension/reduceto1d.h"
 #include "./extension/reshape.h"
+#include "./extension/resize.h"
 #include "./extension/shift.h"
 #include "./extension/slice.h"
 #include "./extension/slice_ex.h"
@@ -45,6 +46,6 @@
 namespace mshadow {
 namespace expr_ex {
 #define clip(src, min, max) map_if(map_if(src, F<op::gt>(src, min), min), F<op::lt>(src, max), max)
-}  // namespace expr
+}  // namespace expr_ex
 }  // namespace mshadow
 #endif  // MSHADOW_EXTENSION_H_

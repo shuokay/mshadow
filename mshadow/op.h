@@ -83,6 +83,20 @@ struct left_shift {
   }
 };
 
+struct max {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType a, DType b) {
+    return a > b ? a : b;
+  }
+};
+
+struct min {
+  template <typename DType>
+  MSHADOW_XINLINE static DType Map(DType a, DType b) {
+    return a < b ? a : b;
+  }
+};
+
 }  // namespace op
 }  // namespace mshadow
 #endif
