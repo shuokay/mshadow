@@ -42,10 +42,4 @@
 #include "./extension/take_grad.h"
 #include "./extension/transpose.h"
 #include "./extension/unpack_patch2col.h"
-#include "op.h"
-namespace mshadow {
-namespace expr_ex {
-#define clip(src, min, max) map_if(map_if(src, F<op::gt>(src, min), min), F<op::lt>(src, max), max)
-}  // namespace expr_ex
-}  // namespace mshadow
 #endif  // MSHADOW_EXTENSION_H_
