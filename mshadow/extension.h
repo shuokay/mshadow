@@ -29,6 +29,7 @@
 #include "./extension/range.h"
 #include "./extension/reduce_with_axis.h"
 #include "./extension/reduceto1d.h"
+#include "./extension/remap.h"
 #include "./extension/reshape.h"
 #include "./extension/resize.h"
 #include "./extension/shift.h"
