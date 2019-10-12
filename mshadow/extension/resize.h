@@ -59,7 +59,7 @@ template <typename SrcExp, typename DType, int srcdim>
 struct Plan<ResizeExp<SrcExp, DType, srcdim>, DType> {
  public:
   explicit Plan(const ResizeExp<SrcExp, DType, srcdim>& e)
-      : src_(e.src_),
+      : src_(MakePlan(e.src_)),
         start_y_(e.start_y_),
         start_x_(e.start_x_),
         step_y_(e.step_y_),
@@ -69,7 +69,7 @@ struct Plan<ResizeExp<SrcExp, DType, srcdim>, DType> {
         out_height_(e.out_height_),
         pad_mode_(e.pad_mode_),
         pad_value_(e.pad_value_) {}
-  MSHADOW_XINLINE float Eval(index_t i, index_t j) const {
+  MSHADOW_XINLINE DType Eval(index_t i, index_t j) const {
     const index_t dst_w = j;
     const index_t dst_h = i % out_height_;
     const index_t c = i / out_height_;
