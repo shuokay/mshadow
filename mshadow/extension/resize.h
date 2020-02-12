@@ -27,8 +27,8 @@ struct ResizeExp : public MakeTensorExp<ResizeExp<SrcExp, DType, srcdim>, SrcExp
   index_t out_height_;
   int pad_mode_;
   DType pad_value_;
-  explicit ResizeExp(const SrcExp& src, index_t out_height, index_t out_width, int pad_mode,
-                     DType pad_value)
+  explicit ResizeExp(
+      const SrcExp& src, index_t out_height, index_t out_width, int pad_mode, DType pad_value)
       : src_(src), out_height_(out_height), pad_mode_(pad_mode), pad_value_(pad_value) {
     Shape<srcdim> src_shape = ShapeCheck<srcdim, SrcExp>::Check(src_);
     this->shape_ = src_shape;
@@ -45,11 +45,12 @@ struct ResizeExp : public MakeTensorExp<ResizeExp<SrcExp, DType, srcdim>, SrcExp
 
 template <typename SrcExp, typename DType, int etype>
 inline ResizeExp<SrcExp, DType, ExpInfo<SrcExp>::kDim> resize(const Exp<SrcExp, DType, etype>& src,
-                                                              index_t out_height, index_t out_width,
+                                                              index_t out_height,
+                                                              index_t out_width,
                                                               int pad_mode = resize_pad::kEdge,
                                                               DType pad_value = 0) {
-  return ResizeExp<SrcExp, DType, ExpInfo<SrcExp>::kDim>(src.self(), out_height, out_width,
-                                                         pad_mode, pad_value);
+  return ResizeExp<SrcExp, DType, ExpInfo<SrcExp>::kDim>(
+      src.self(), out_height, out_width, pad_mode, pad_value);
 }
 
 MSHADOW_XINLINE static bool InBound(int32_t x, index_t low, index_t high) {
@@ -80,10 +81,14 @@ struct Plan<ResizeExp<SrcExp, DType, srcdim>, DType> {
     int32_t src_h_ceil = src_h_floor + 1;
     int32_t src_w_ceil = src_w_floor + 1;
     if (pad_mode_ == resize_pad::kEdge) {
-      src_h_floor = mshadow::op::min::Map(mshadow::op::max::Map(src_h_floor, 0), src_height_ - 1);
-      src_w_floor = mshadow::op::min::Map(mshadow::op::max::Map(src_w_floor, 0), src_width_ - 1);
-      src_h_ceil = mshadow::op::min::Map(mshadow::op::max::Map(src_h_ceil, 0), src_height_ - 1);
-      src_w_ceil = mshadow::op::min::Map(mshadow::op::max::Map(src_w_ceil, 0), src_width_ - 1);
+      auto get_src_coord = [](int32_t x, int32_t max) {
+        return mshadow::op::min::Map(mshadow::op::max::Map(x, 0), max);
+      };
+
+      src_h_floor = get_src_coord(src_h_floor, src_height_ - 1);
+      src_w_floor = get_src_coord(src_w_floor, src_width_ - 1);
+      src_h_ceil = get_src_coord(src_h_ceil, src_height_ - 1);
+      src_w_ceil = get_src_coord(src_w_ceil, src_width_ - 1);
     }
 
     DType top_left_value = pad_value_, top_right_value = pad_value_, bottom_left_value = pad_value_,
