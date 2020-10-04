@@ -1,11 +1,11 @@
-/**
- * @file op.h
- * @author Yushu Gao
- * @brief a collection of ops for F function
- *
- * @copyright Copyright (c) 2019
- *
- */
+/*!
+ * Copyright (c) 2020 by Contributors
+ * \file: op.h
+ * \date: 2020-10-05
+ * \author: Yushu Gao
+ * \brief: 
+*/
+
 #ifndef MSHADOW_OP_H_
 #define MSHADOW_OP_H_
 #include "base.h"
@@ -83,14 +83,14 @@ struct left_shift {
   }
 };
 
-struct max {
+struct maximum {
   template <typename DType>
   MSHADOW_XINLINE static DType Map(DType a, DType b) {
     return a > b ? a : b;
   }
 };
 
-struct min {
+struct minimum {
   template <typename DType>
   MSHADOW_XINLINE static DType Map(DType a, DType b) {
     return a < b ? a : b;

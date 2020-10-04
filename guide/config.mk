@@ -14,10 +14,10 @@
 
 ADD_MSHADOW_CFLAGS = -I/usr/include/openblas -fopenmp
 
-USE_GLOG = 1
+USE_GLOG = 0
 
 # whether use CUDA during compile
-USE_CUDA = 0
+USE_CUDA = 1
 
 # add the path to CUDA libary to link and compile flag
 # if you have already add them to enviroment variable, leave it as NONE

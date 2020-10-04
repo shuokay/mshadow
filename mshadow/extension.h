@@ -32,7 +32,6 @@
 #include "./extension/remap.h"
 #include "./extension/reshape.h"
 #include "./extension/resize.h"
-#include "./extension/shift.h"
 #include "./extension/slice.h"
 #include "./extension/slice_ex.h"
 #include "./extension/spatial_pool.h"
